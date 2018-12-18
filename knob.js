@@ -716,4 +716,32 @@ document.addEventListener("wheel", function(event) {
 		let stepSpeed = speedPhactor * step * direction;
 		currentKnob.wheelEvent(event, stepSpeed); 	//call function that calculate value and speed depending on wheelDeltaY 
 		currentKnob.previousTime = currentTime; //store the previous timeStamp
-	}}, true);	 
+	}}, true);
+
+        	
+/**
+ *  create a Canvas linear Gradient with color passed by paramenter to a LinearGradientObject also passed by parameter
+ *
+ *  @param {object} Canvas LinearGradient Object
+ *  @param {array} array of color with two color formats
+ *  ["#FFFFFF", "#FF0000"] or  ["rgba(255,255,255,1)", "rgba(255,0,0,1)"]
+ *
+ *  @public
+ *
+ *	@return {void}   
+ */ 
+function linearGradientCreator(LinearGradientObject, colorArray)
+{	
+	 //Calculate position of color in gradients form 0 to 1
+	 var position = 1 / (colorArray.length-1); 
+	
+	// if only one color locate it on position 1
+	if (position == Infinity){position = 1;}
+	
+	//locate each color on calculated position according to its index and color array length
+  	for (var color = 0; color <  colorArray.length; color++)
+  	{				
+  		LinearGradientObject.addColorStop(position * color, colorArray[color]);
+  	}
+	 
+ }
