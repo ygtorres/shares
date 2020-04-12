@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+</head>
+
+<body>
+	<div id="phase"></div>
+	<div><label id="info"></label></div>
+	<div id="amplitude"></div>
+	
+</body>
+<script type="application/javascript" src="knob.js"></script>
+<script src="/ComposerHelper/js/object/share.js"></script> 
+<script>
+	
+	
+	
+
+// <!------------------->
+// <!-- gradient type -->
+// <!------------------->
+let gTStyle = {};
+gTStyle.indicatorFill = ["#C4505E"] ;
+gTStyle.indicatorDoubleFill = ["#4DC8FA"];
+gTStyle.trackFill = "#242A2E";
+gTStyle.trackStroke = "#181e22"; 
+gTStyle.outerWheelFill = ["#70777d","#394046","#353c42"];
+gTStyle.innerWheelFill = ["#52595f","#464d53","#3b4248","#2a3137"] ; 
+gTStyle.shadowFill = "rgba(0,0,0,0.3)";	
+gTStyle.mouseMoveSizePhactor = 47.5; 
+gTStyle.mouseUpSizePhactor = 60; 
+gTStyle.indicatorType = "single";
+gTStyle.innerGradientOrientation= "vertical";
+gTStyle.indicatorGradientOrientation= "vertical";
+gTStyle.outerGradientOrientation= "vertical";
+
+
+let rTStyle = {};
+rTStyle.ring = 8;// total of ring [0 to 20]
+rTStyle.indicatorFill = ["#FF8800", "#FF0000"];
+rTStyle.indicatorDoubleFill = ["#FF8800", "#FF0000"];
+rTStyle.ringFill = ["#f2a13f"];
+rTStyle.outerWheelFill = ["#f2a13f", "#d08f40"];
+rTStyle.innerWheelFill =["#FFFFFF"];
+rTStyle.innerGradientOrientation= "vertical";
+rTStyle.indicatorGradientOrientation= "horizontal";
+rTStyle.outerGradientOrientation= "vertical";
+//	
+let id = "gradientKnob";
+let type = "gradient";
+let trackCircleSize = 6/8;	
+let width = 25;	
+let height = 25;
+let min = 0;
+let max = 127;
+let step = 1;
+let stepTime = 100;
+let value = 64;
+let unit = "db";
+let callback = knobChangeFunction;	
+let hint = "gradient Knob de ejemplo";	
+
+var gradientKnob=new knob(id, type, gTStyle, trackCircleSize , width, height, min, max,  value, step, stepTime, unit, callback, hint);
+knobMatrix.push(gradientKnob);	//
+gradientKnob.attachUI("roundedKnob", document.getElementById("phase"));	
+	
+
+var ringKnob=new knob("ringKnob", "ring", rTStyle, trackCircleSize , width, height, min, max,  value, step, stepTime, unit, callback, hint);
+knobMatrix.push(ringKnob);	//
+ringKnob.attachUI("roundedKnob", document.querySelector("#phase"));	
+
+
+let QKnob = {};	
+QKnob.ring = 8;// total of ring [0 to 20]
+QKnob.indicatorFill =["#D5F9F6"];
+QKnob.indicatorDoubleFill =["#D5F9F6"];
+QKnob.ringFill = ["#48DCD2","#369691"];
+QKnob.outerWheelFill = ["#006A64", "#0e161b", "#212a30"];
+QKnob.innerWheelFill =["#21B0A9", "#11948E"];
+QKnob.innerGradientOrientation= "horizontal";
+QKnob.indicatorGradientOrientation= "vertical";
+QKnob.outerGradientOrientation= "vertical";
+
+	
+var ringKnob2=new knob("ringKnob2", "ring", QKnob, trackCircleSize , width, height, min, max,  value, step, stepTime, unit, knobChangeFunction, hint);
+knobMatrix.push(ringKnob2);	//
+ringKnob2.attachUI("roundedKnob", document.querySelector("#phase"));	
+	
+/*-------*/	
+/*EVENT-FUNCTION*/
+/*---------------------*/ 
+//knob	
+function knobChangeFunction() {	
+	//function in response to change any of knob canvas 
+	document.getElementById("info").innerHTML = ("Value: " + Math.round(this.value) + this.unit);
+	document.getElementById("info").innerHTML += (" Min: " + this.min);
+	document.getElementById("info").innerHTML += (" Max: " + this.max);
+	document.getElementById("info").innerHTML += (" Step: " + this.step);
+}
+	
+
+
+
+</script>
+
+ <style type="text/css">
+	 
+  .Knob
+ {
+  background-color: #272b30;
+  border: none;
+ } 
+	 
+</style>
+</html>
